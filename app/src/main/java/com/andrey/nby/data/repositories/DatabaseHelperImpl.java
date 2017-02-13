@@ -54,6 +54,10 @@ public class DatabaseHelperImpl implements DatabaseHelper {
                 Log.i(TAG, "onResponse");
                 if (response.isSuccessful()) {
                     final List<Currency> currencyList = response.body();
+                    if (currencyList.isEmpty()){
+                        toastMessage(R.string.on_failure, context);
+                        return;
+                    }
                     Realm realm = null;
                     try {
                         realm = Realm.getDefaultInstance();
