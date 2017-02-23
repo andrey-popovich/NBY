@@ -1,31 +1,31 @@
 package com.andrey.nby.ui.mainScreen;
 
 
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+;
+import android.support.v7.widget.Toolbar;
 
 import com.andrey.nby.App;
 import com.andrey.nby.R;
 import com.andrey.nby.data.DataManager;
-import com.andrey.nby.data.repositories.Currency;
-import com.andrey.nby.ui.currencyListAdapter.CurrencyAdapter;
+import com.andrey.nby.ui.fragments.CurrenciesFragment;
+
 
 import javax.inject.Inject;
 
-import io.realm.Realm;
-
 public class MainActivity extends AppCompatActivity implements MainScreenView {
-
-//    @Inject
-//    MainScreenPresenter mPresenter;
 
     @Inject
     DataManager mDataManager;
 
-    private Realm realm = Realm.getDefaultInstance();
+    FragmentPagerAdapter adapterViewPager;
+    ViewPager vpPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,26 +34,54 @@ public class MainActivity extends AppCompatActivity implements MainScreenView {
         App.getComponent().inject(this);
 
         getCurrencyList();
-        initAdapter();
-    }
 
-    private void initAdapter() {
-        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.main_recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        mRecyclerView.setAdapter(new CurrencyAdapter(realm.where(Currency.class).findAll(), this));
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
+        vpPager = (ViewPager) findViewById(R.id.vpPager);
+        vpPager.setAdapter(adapterViewPager);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(vpPager);
     }
 
     public void getCurrencyList() {
         mDataManager.updateDatabase(this);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (realm != null) {
-            realm.close();
+    public static class MyPagerAdapter extends FragmentPagerAdapter {
+
+        private static int NUM_ITEMS = 2;
+
+        public MyPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return CurrenciesFragment.newInstance(0, "All");
+                case 1:
+                    return CurrenciesFragment.newInstance(1, "Favorites");
+                default:
+                    return null;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return NUM_ITEMS;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return "Весь список";
+                case 1:
+                    return "Обране";
+            }
+            return null;
         }
     }
 }

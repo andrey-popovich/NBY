@@ -1,6 +1,10 @@
 package com.andrey.nby.ui.currencyListAdapter;
 
-public interface CurrencyListView {
-    void onFavoriteClick();
+import android.view.View;
 
+import com.andrey.nby.data.repositories.Currency;
+
+public interface CurrencyListView {
+
+    void onItemClick(Currency currency, View view);
 }

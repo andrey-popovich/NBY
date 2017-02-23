@@ -6,6 +6,7 @@ import com.andrey.nby.App;
 import com.andrey.nby.data.DataManager;
 import com.andrey.nby.data.prefs.PreferencesHelperImp;
 import com.andrey.nby.data.repositories.DatabaseHelperImpl;
+import com.andrey.nby.ui.currencyListAdapter.CurrencyPresenter;
 import com.andrey.nby.ui.mainScreen.MainScreenPresenter;
 
 import javax.inject.Singleton;
@@ -42,8 +43,14 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    MainScreenPresenter mainScreenPresenter() {
+    MainScreenPresenter provideMainScreenPresenter() {
         return new MainScreenPresenter(App.getComponent());
+    }
+
+    @Provides
+    @Singleton
+    CurrencyPresenter provideCurrencyPresenter(){
+        return new CurrencyPresenter(App.getComponent());
     }
 
     @Provides

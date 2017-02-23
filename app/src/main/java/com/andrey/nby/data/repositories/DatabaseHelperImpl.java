@@ -10,6 +10,8 @@ import com.andrey.nby.di.component.ApplicationComponent;
 import com.andrey.nby.service.NBUClient;
 import com.andrey.nby.service.NBUService;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 import io.realm.Realm;
@@ -50,7 +52,7 @@ public class DatabaseHelperImpl implements DatabaseHelper {
         Call<List<Currency>> call = service.getCurrencyList("");
         call.enqueue(new Callback<List<Currency>>() {
             @Override
-            public void onResponse(Call<List<Currency>> call, Response<List<Currency>> response) {
+            public void onResponse(Call<List<Currency>> call, final Response<List<Currency>> response) {
                 Log.i(TAG, "onResponse");
                 if (response.isSuccessful()) {
                     final List<Currency> currencyList = response.body();
@@ -60,12 +62,17 @@ public class DatabaseHelperImpl implements DatabaseHelper {
                     }
                     Realm realm = null;
                     try {
+                        Log.i(TAG, "ITEMS SIZE: " + String.valueOf(currencyList.size()));
                         realm = Realm.getDefaultInstance();
                         realm.executeTransaction(new Realm.Transaction() {
                             @Override
                             public void execute(Realm realm) {
                                 for (int i = 0; i < currencyList.size(); i++) {
-                                    realm.insertOrUpdate(currencyList.get(i));
+                                    Currency currency = currencyList.get(i);
+                                    if (currency.getR030() != null) {
+                                        currency.setFavorite(false);
+                                    }
+                                    realm.copyToRealmOrUpdate(currency);
                                 }
                             }
                         });

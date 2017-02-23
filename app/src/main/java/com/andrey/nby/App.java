@@ -1,6 +1,7 @@
 package com.andrey.nby;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.andrey.nby.di.component.ApplicationComponent;
 import com.andrey.nby.di.component.DaggerApplicationComponent;
@@ -12,12 +13,18 @@ import io.realm.RealmConfiguration;
 public class App extends Application {
 
     private static ApplicationComponent mComponent;
+    private static Context context;
+
+    public static Context getContext() {
+        return context;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
         initRealmConfig();
         mComponent = buildComponent();
+        context = this;
     }
 
     private void initRealmConfig() {

@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">NBU</string>
-    <string name="on_failure">Data was not updated. Try later.</string>
-    <string name="on_response">Data was updated</string>
-    <string name="on_delete">Data was deleted</string>
+    <string name="app_name">Курс валют НБУ</string>
+    <string name="on_failure">Помилка запиту даних. Спробуйте пізніше</string>
+    <string name="on_response">Дані було оновлено</string>
+    <string name="on_delete">Дані було видалено</string>
+    <string name="currencies_list">Всі валюти</string>
+    <string name="favorites">Обране</string>
 </resources>
