@@ -6,5 +6,5 @@ import com.andrey.nby.data.repositories.Currency;
 
 public interface CurrencyListView {
 
-    void onItemClick(Currency currency, View view);
+    void onFavoriteClick(Currency currency, View view, CurrencyAdapter.CurrencyViewHolder holder);
 }

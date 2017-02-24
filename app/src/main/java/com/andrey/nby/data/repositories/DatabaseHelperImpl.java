@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -69,9 +70,6 @@ public class DatabaseHelperImpl implements DatabaseHelper {
                             public void execute(Realm realm) {
                                 for (int i = 0; i < currencyList.size(); i++) {
                                     Currency currency = currencyList.get(i);
-                                    if (currency.getR030() != null) {
-                                        currency.setFavorite(false);
-                                    }
                                     realm.copyToRealmOrUpdate(currency);
                                 }
                             }

@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.andrey.nby.App;
@@ -36,18 +34,22 @@ public class CurrencyAdapter extends RealmRecyclerViewAdapter<Currency, Currency
     }
 
     @Override
-    public void onBindViewHolder(CurrencyViewHolder holder, int position) {
+    public void onBindViewHolder(final CurrencyViewHolder holder, int position) {
         final Currency currency = getItem(position);
         if (currency != null) {
-            holder.r030.setText("(" + Integer.toString(currency.getR030()) + ")");
             holder.txt.setText(currency.getTxt());
             holder.cc.setText(currency.getCc());
             holder.rate.setText(Double.toString(currency.getRate()));
             holder.date.setText(currency.getExchangeDate());
+            if (currency.isFavorite()) {
+                holder.favorite.setImageResource(R.drawable.star_yellow_36dp);
+            } else {
+                holder.favorite.setImageResource(R.drawable.star_white_36dp);
+            }
             holder.favorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mCurrencyPresenter.onItemClick(currency, view);
+                    mCurrencyPresenter.onFavoriteClick(currency, view, holder);
                 }
             });
         }
@@ -55,7 +57,6 @@ public class CurrencyAdapter extends RealmRecyclerViewAdapter<Currency, Currency
 
     public static class CurrencyViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView r030;
         public TextView txt;
         public TextView cc;
         public TextView rate;
@@ -65,7 +66,6 @@ public class CurrencyAdapter extends RealmRecyclerViewAdapter<Currency, Currency
         public CurrencyViewHolder(View itemView) {
             super(itemView);
 
-            r030 = (TextView) itemView.findViewById(R.id.currency_r030);
             txt = (TextView) itemView.findViewById(R.id.currency_txt);
             cc = (TextView) itemView.findViewById(R.id.currency_cc);
             rate = (TextView) itemView.findViewById(R.id.currency_rate);

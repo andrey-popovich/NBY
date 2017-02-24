@@ -3,10 +3,10 @@
     android:id="@+id/currency_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
+    android:layout_margin="3dp"
     android:background="@color/colorLight"
     android:orientation="vertical"
-    android:padding="15dp">
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/currency_txt"
@@ -15,8 +15,7 @@
         android:layout_alignParentLeft="true"
         android:layout_margin="3dp"
         android:text="Гривня"
-        android:textColor="@color/colorPrimaryText"
-        android:textSize="20dp" />
+        android:textColor="@color/colorPrimaryText" />
 
     <TextView
         android:id="@+id/currency_cc"
@@ -27,24 +26,13 @@
         android:text="UAH"
         android:textColor="@color/colorSecondaryText" />
 
-    <TextView
-        android:id="@+id/currency_r030"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/currency_txt"
-        android:layout_margin="3dp"
-        android:layout_toRightOf="@id/currency_cc"
-        android:text="(777)"
-        android:textColor="@color/colorSecondaryText" />
-
     <ImageView
         android:id="@+id/favorite"
-        android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginLeft="20dp"
-        android:src="@drawable/star_48dp" />
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp" />
 
     <TextView
         android:id="@+id/currency_rate"
@@ -53,8 +41,7 @@
         android:layout_margin="3dp"
         android:layout_toLeftOf="@id/favorite"
         android:text="1.02598"
-        android:textColor="@color/colorPrimaryText"
-        android:textSize="20dp" />
+        android:textColor="@color/colorPrimaryText" />
 
     <TextView
         android:id="@+id/currency_date"

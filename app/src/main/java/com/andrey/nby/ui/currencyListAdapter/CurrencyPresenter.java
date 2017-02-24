@@ -20,7 +20,7 @@ public class CurrencyPresenter implements CurrencyListView {
     }
 
     @Override
-    public void onItemClick(final Currency currency, final View view) {
+    public void onFavoriteClick(final Currency currency, final View view, final CurrencyAdapter.CurrencyViewHolder holder) {
         Realm realm = null;
         try {
             realm = Realm.getDefaultInstance();
@@ -29,6 +29,12 @@ public class CurrencyPresenter implements CurrencyListView {
                 public void execute(Realm realm) {
                     currency.setFavorite(!currency.isFavorite());
                     realm.insertOrUpdate(currency);
+
+                    if (currency.isFavorite()) {
+                        holder.favorite.setImageResource(R.drawable.star_yellow_36dp);
+                    } else {
+                        holder.favorite.setImageResource(R.drawable.star_white_36dp);
+                    }
 
                     Log.i(TAG, "isFavorite: " + currency.isFavorite());
                 }
