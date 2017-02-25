@@ -7,6 +7,7 @@ import com.andrey.nby.data.DataManager;
 import com.andrey.nby.data.prefs.PreferencesHelperImp;
 import com.andrey.nby.data.repositories.DatabaseHelperImpl;
 import com.andrey.nby.ui.currencyListAdapter.CurrencyPresenter;
+import com.andrey.nby.ui.mainScreen.MainActivity;
 import com.andrey.nby.ui.mainScreen.MainScreenPresenter;
 
 import javax.inject.Singleton;

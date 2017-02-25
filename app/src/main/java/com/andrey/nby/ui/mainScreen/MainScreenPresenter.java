@@ -17,4 +17,10 @@ public class MainScreenPresenter {
     public MainScreenPresenter(@NonNull ApplicationComponent appComponent) {
         appComponent.inject(this);
     }
+
+    public void endLoadingAnimation() {
+    }
+
+    public void startLoadingAnimation() {
+    }
 }

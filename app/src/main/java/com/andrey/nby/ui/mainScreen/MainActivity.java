@@ -1,6 +1,7 @@
 package com.andrey.nby.ui.mainScreen;
 
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,12 +9,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-;
 import android.support.v7.widget.Toolbar;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.andrey.nby.App;
 import com.andrey.nby.R;
 import com.andrey.nby.data.DataManager;
+import com.andrey.nby.di.component.ApplicationComponent;
 import com.andrey.nby.ui.fragments.CurrenciesFragment;
 
 
@@ -26,14 +29,14 @@ public class MainActivity extends AppCompatActivity implements MainScreenView {
 
     FragmentPagerAdapter adapterViewPager;
     ViewPager vpPager;
+    FloatingActionButton fab;
+    Animation loadingAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         App.getComponent().inject(this);
-
-        getCurrencyList();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -42,10 +45,13 @@ public class MainActivity extends AppCompatActivity implements MainScreenView {
         vpPager.setAdapter(adapterViewPager);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(vpPager);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        getCurrencyList();
     }
 
     public void getCurrencyList() {
-        mDataManager.updateDatabase(this);
+        mDataManager.updateDatabase(this, fab);
     }
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {

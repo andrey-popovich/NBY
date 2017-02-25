@@ -9,6 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import com.andrey.nby.App;
 import com.andrey.nby.R;
@@ -25,7 +28,6 @@ public class CurrenciesFragment extends Fragment {
     private int page;
     private Realm realm;
     private RecyclerView mRecyclerView;
-
 
     public static CurrenciesFragment newInstance(int page, String title) {
         CurrenciesFragment fragment = new CurrenciesFragment();

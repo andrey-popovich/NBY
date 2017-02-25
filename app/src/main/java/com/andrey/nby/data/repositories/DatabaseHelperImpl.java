@@ -1,21 +1,25 @@
 package com.andrey.nby.data.repositories;
 
 import android.content.Context;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
-import com.andrey.nby.App;
 import com.andrey.nby.R;
 import com.andrey.nby.di.component.ApplicationComponent;
 import com.andrey.nby.service.NBUClient;
 import com.andrey.nby.service.NBUService;
-
-import org.json.JSONObject;
+import com.andrey.nby.ui.mainScreen.MainActivity;
+import com.andrey.nby.ui.mainScreen.MainScreenPresenter;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.realm.Realm;
-import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,6 +31,8 @@ public class DatabaseHelperImpl implements DatabaseHelper {
     public DatabaseHelperImpl(ApplicationComponent component) {
         component.inject(this);
     }
+
+    Animation loadingAnimation;
 
     @Override
     public void deleteCurrency(Currency currency, Context context) {
@@ -48,7 +54,9 @@ public class DatabaseHelperImpl implements DatabaseHelper {
     }
 
     @Override
-    public void updateCurrency(final Context context) {
+    public void updateCurrency(final Context context, final FloatingActionButton fab) {
+        loadingAnimation = AnimationUtils.loadAnimation(context, R.anim.loading);
+        fab.startAnimation(loadingAnimation);
         NBUService service = NBUClient.getNBUService();
         Call<List<Currency>> call = service.getCurrencyList("");
         call.enqueue(new Callback<List<Currency>>() {
@@ -57,7 +65,7 @@ public class DatabaseHelperImpl implements DatabaseHelper {
                 Log.i(TAG, "onResponse");
                 if (response.isSuccessful()) {
                     final List<Currency> currencyList = response.body();
-                    if (currencyList.isEmpty()){
+                    if (currencyList.isEmpty()) {
                         toastMessage(R.string.on_failure, context);
                         return;
                     }
@@ -70,6 +78,13 @@ public class DatabaseHelperImpl implements DatabaseHelper {
                             public void execute(Realm realm) {
                                 for (int i = 0; i < currencyList.size(); i++) {
                                     Currency currency = currencyList.get(i);
+
+                                    // set currency isFavorite
+                                    Currency result = realm.where(Currency.class).equalTo("r030", currency.getR030()).findFirst();
+                                    if (result.isFavorite()) {
+                                        currency.setFavorite(true);
+                                    }
+
                                     realm.copyToRealmOrUpdate(currency);
                                 }
                             }
@@ -79,6 +94,8 @@ public class DatabaseHelperImpl implements DatabaseHelper {
                             realm.close();
                         }
                     }
+                    fab.clearAnimation();
+                    fab.setVisibility(View.GONE);
                 }
                 toastMessage(R.string.on_response, context);
             }
@@ -86,12 +103,14 @@ public class DatabaseHelperImpl implements DatabaseHelper {
             @Override
             public void onFailure(Call<List<Currency>> call, Throwable t) {
                 Log.i(TAG, "onFailure " + t.getMessage());
+                fab.clearAnimation();
+                fab.setVisibility(View.GONE);
                 toastMessage(R.string.on_failure, context);
             }
         });
     }
 
-    public void toastMessage(int text, Context context){
+    public void toastMessage(int text, Context context) {
         Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
         toast.show();
     }
