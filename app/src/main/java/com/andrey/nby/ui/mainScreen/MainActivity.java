@@ -1,6 +1,7 @@
 package com.andrey.nby.ui.mainScreen;
 
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -18,6 +21,7 @@ import com.andrey.nby.R;
 import com.andrey.nby.data.DataManager;
 import com.andrey.nby.di.component.ApplicationComponent;
 import com.andrey.nby.ui.fragments.CurrenciesFragment;
+import com.andrey.nby.ui.settings.SettingsActivity;
 
 
 import javax.inject.Inject;
@@ -88,6 +92,24 @@ public class MainActivity extends AppCompatActivity implements MainScreenView {
                     return "Обране";
             }
             return null;
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.item_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_settings:
+                Intent settingsActivity = new Intent(this, SettingsActivity.class);
+                startActivity(settingsActivity);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

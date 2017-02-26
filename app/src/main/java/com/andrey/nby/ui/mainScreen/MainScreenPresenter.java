@@ -22,5 +22,6 @@ public class MainScreenPresenter {
     }
 
     public void startLoadingAnimation() {
+
     }
 }

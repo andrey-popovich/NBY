@@ -2,6 +2,7 @@ package com.andrey.nby.ui.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,14 +16,21 @@ import android.widget.ImageView;
 
 import com.andrey.nby.App;
 import com.andrey.nby.R;
+import com.andrey.nby.data.prefs.PreferencesHelperImp;
 import com.andrey.nby.data.repositories.Currency;
+import com.andrey.nby.di.component.ApplicationComponent;
 import com.andrey.nby.ui.currencyListAdapter.CurrencyAdapter;
+
+import javax.inject.Inject;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
 public class CurrenciesFragment extends Fragment {
+
+    @Inject
+    PreferencesHelperImp mPreferencesHelper;
 
     private String title;
     private int page;
@@ -41,6 +49,7 @@ public class CurrenciesFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        App.getComponent().inject(this);
         page = getArguments().getInt("page", 0);
         title = getArguments().getString("title");
     }
@@ -52,14 +61,15 @@ public class CurrenciesFragment extends Fragment {
         Context context = App.getContext();
         realm = Realm.getDefaultInstance();
         RealmResults<Currency> currencies = null;
+        String sort = mPreferencesHelper.getSortString();
 
         switch (page) {
             case 0:
-                currencies = realm.where(Currency.class).findAllSorted("rate", Sort.DESCENDING);
+                currencies = realm.where(Currency.class).findAllSorted(sort, Sort.DESCENDING);
                 break;
             case 1:
                 currencies = realm.where(Currency.class).equalTo("isFavorite", true)
-                        .findAllSorted("rate", Sort.DESCENDING);
+                        .findAllSorted(sort, Sort.DESCENDING);
                 break;
             default:
                 break;

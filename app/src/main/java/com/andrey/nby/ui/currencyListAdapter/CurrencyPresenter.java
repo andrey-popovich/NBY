@@ -1,17 +1,21 @@
 package com.andrey.nby.ui.currencyListAdapter;
 
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 
 import com.andrey.nby.R;
+import com.andrey.nby.data.prefs.PreferencesHelperImp;
 import com.andrey.nby.data.repositories.Currency;
 import com.andrey.nby.di.component.ApplicationComponent;
+
+import javax.inject.Inject;
 
 import io.realm.Realm;
 
 public class CurrencyPresenter implements CurrencyListView {
+
+    @Inject
+    PreferencesHelperImp mPreferencesHelper;
 
     private static final String TAG = "CurrencyPresenter";
 
@@ -35,6 +39,8 @@ public class CurrencyPresenter implements CurrencyListView {
                     } else {
                         holder.favorite.setImageResource(R.drawable.star_white_36dp);
                     }
+
+                    mPreferencesHelper.playSoundAndVibration();
 
                     Log.i(TAG, "isFavorite: " + currency.isFavorite());
                 }

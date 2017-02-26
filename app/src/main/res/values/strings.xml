@@ -5,4 +5,21 @@
     <string name="on_delete">Дані було видалено</string>
     <string name="currencies_list">Всі валюти</string>
     <string name="favorites">Обране</string>
+    <string name="settings_controls">Управління</string>
+    <string name="settings_sounds_title">Ввімкнути звук</string>
+    <string name="settings_vibration_title">Ввімкнути вібрацію</string>
+    <string name="settings_sounds_summary">Звук при додаванні та видаленні з обраного</string>
+    <string name="settings_vibration_summary">Вібрація при додаванні та видаленні з обраного</string>
+    <string name="settings_title">Налаштування</string>
+    <string name="settings_sort">Сортування</string>
+
+    <string-array name="sortList">
+        <item>За цінністю валюти</item>
+        <item>За символьним кодом</item>
+    </string-array>
+
+    <string-array name="sortValues">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>

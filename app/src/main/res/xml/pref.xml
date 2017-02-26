@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/settings_controls">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="soundsOn"
+            android:summary="@string/settings_sounds_summary"
+            android:title="@string/settings_sounds_title" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="vibrationOn"
+            android:summary="@string/settings_vibration_summary"
+            android:title="@string/settings_vibration_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/settings_sort">
+        <ListPreference
+            android:title="Виберіть категорію сортування"
+            android:key="sortList"
+            android:defaultValue="1"
+            android:entries="@array/sortList"
+            android:entryValues="@array/sortValues" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

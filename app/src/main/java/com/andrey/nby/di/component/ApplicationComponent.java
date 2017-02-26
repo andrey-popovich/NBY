@@ -7,6 +7,7 @@ import com.andrey.nby.data.repositories.DatabaseHelperImpl;
 import com.andrey.nby.di.module.ApplicationModule;
 import com.andrey.nby.ui.currencyListAdapter.CurrencyAdapter;
 import com.andrey.nby.ui.currencyListAdapter.CurrencyPresenter;
+import com.andrey.nby.ui.fragments.CurrenciesFragment;
 import com.andrey.nby.ui.mainScreen.MainActivity;
 import com.andrey.nby.ui.mainScreen.MainScreenPresenter;
 
@@ -27,4 +28,6 @@ public interface ApplicationComponent {
 
     void inject(CurrencyPresenter currencyPresenter);
     void inject(CurrencyAdapter currencyAdapter);
+
+    void inject(CurrenciesFragment currenciesFragment);
 }

@@ -81,12 +81,17 @@ public class DatabaseHelperImpl implements DatabaseHelper {
 
                                     // set currency isFavorite
                                     Currency result = realm.where(Currency.class).equalTo("r030", currency.getR030()).findFirst();
-                                    if (result.isFavorite()) {
+                                    if (result != null) {
+                                        currency.setFavorite(result.isFavorite());
+                                    } else {
                                         currency.setFavorite(true);
                                     }
 
                                     realm.copyToRealmOrUpdate(currency);
                                 }
+
+                                // remove currency Гривня
+                                realm.where(Currency.class).equalTo("r030", 980).findFirst().deleteFromRealm();
                             }
                         });
                     } finally {
