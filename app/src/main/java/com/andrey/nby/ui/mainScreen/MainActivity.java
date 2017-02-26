@@ -26,7 +26,7 @@ import com.andrey.nby.ui.settings.SettingsActivity;
 
 import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity implements MainScreenView {
+public class MainActivity extends AppCompatActivity {
 
     @Inject
     DataManager mDataManager;
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements MainScreenView {
 
         private static int NUM_ITEMS = 2;
 
-        public MyPagerAdapter(FragmentManager fm) {
+        MyPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 

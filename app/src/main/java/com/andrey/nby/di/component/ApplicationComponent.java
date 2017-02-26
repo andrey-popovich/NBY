@@ -9,7 +9,6 @@ import com.andrey.nby.ui.currencyListAdapter.CurrencyAdapter;
 import com.andrey.nby.ui.currencyListAdapter.CurrencyPresenter;
 import com.andrey.nby.ui.fragments.CurrenciesFragment;
 import com.andrey.nby.ui.mainScreen.MainActivity;
-import com.andrey.nby.ui.mainScreen.MainScreenPresenter;
 
 import javax.inject.Singleton;
 
@@ -23,7 +22,6 @@ public interface ApplicationComponent {
     void inject(DatabaseHelperImpl databaseHelper);
     void inject(PreferencesHelperImp preferencesHelperImp);
 
-    void inject(MainScreenPresenter mainPresenter);
     void inject(MainActivity mainActivity);
 
     void inject(CurrencyPresenter currencyPresenter);

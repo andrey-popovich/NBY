@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="3dp"
+    android:animateLayoutChanges="true"
     android:background="@color/colorLight"
     android:orientation="vertical"
-    android:animateLayoutChanges="true"
     android:padding="10dp">
 
     <TextView
@@ -15,7 +15,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_margin="3dp"
-        android:text="Гривня"
         android:textColor="@color/colorPrimaryText" />
 
     <TextView
@@ -24,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/currency_txt"
         android:layout_margin="3dp"
-        android:text="UAH"
         android:textColor="@color/colorSecondaryText" />
 
     <ImageView
@@ -41,7 +39,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:layout_toLeftOf="@id/favorite"
-        android:text="1.02598"
         android:textColor="@color/colorPrimaryText" />
 
     <TextView
@@ -51,7 +48,6 @@
         android:layout_below="@id/currency_rate"
         android:layout_margin="3dp"
         android:layout_toLeftOf="@id/favorite"
-        android:text="21.03.2017"
         android:textColor="@color/colorSecondaryText" />
 
 </RelativeLayout>
