@@ -12,12 +12,8 @@ import com.andrey.nby.R;
 import com.andrey.nby.di.component.ApplicationComponent;
 import com.andrey.nby.service.NBUClient;
 import com.andrey.nby.service.NBUService;
-import com.andrey.nby.ui.mainScreen.MainActivity;
-import com.andrey.nby.ui.mainScreen.MainScreenPresenter;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import io.realm.Realm;
 import retrofit2.Call;

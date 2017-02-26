@@ -1,12 +1,10 @@
 package com.andrey.nby.data.repositories;
 
-import io.realm.RealmObject;
+import com.google.gson.annotations.SerializedName;
 
+import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
-
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
 @RealmClass
 public class Currency extends RealmObject {

@@ -2,7 +2,6 @@ package com.andrey.nby.ui.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,15 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 
 import com.andrey.nby.App;
 import com.andrey.nby.R;
 import com.andrey.nby.data.prefs.PreferencesHelperImp;
 import com.andrey.nby.data.repositories.Currency;
-import com.andrey.nby.di.component.ApplicationComponent;
 import com.andrey.nby.ui.currencyListAdapter.CurrencyAdapter;
 
 import javax.inject.Inject;
