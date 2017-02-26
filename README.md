@@ -1,5 +1,7 @@
 # NBY
 
+![ic_launcher](https://cloud.githubusercontent.com/assets/21371936/23341279/f2313dcc-fc4c-11e6-9323-0bd0a13083ad.png)
+
 This application is made to show my skills in MVP, Realm, REST API, dependency inversion, material design.
 
 It parses data from National Bank of Ukraine into Realm database and shows it in recyclerview.
